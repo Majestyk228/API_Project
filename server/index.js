@@ -1,8 +1,10 @@
 //IMPORTS
 const mysql = require('mysql');
 const express = require('express');
-const contact = require('./controllers/contacts/contacts.js');
+//const contact = require('./controllers/contacts.js');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const router = require('./routes/routes.js');
 
 //Tools
 var today = new Date();
@@ -14,7 +16,7 @@ const port = process.env.PORT || 3000;
 
 //middlewares
 app.use(bodyParser.json());
-app.use(router);
+app.use("/", router);
 
 //Écoute du serveur
 app.listen(port, () => {

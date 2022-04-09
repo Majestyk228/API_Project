@@ -1,22 +1,13 @@
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
+const config = require('../config/config.js');
 
-module.exports({
-    connect: mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "api"
-    })
-});
+async function query(sql) {
+    const connection = await mysql.createConnection(config.db);
+    const [results,] = await connection.execute(sql);
 
-/*connect.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-    
-    var sql = "INSERT INTO contact (id,name,firstname,lastname,mail,creationDate) VALUES (null,'Etienne DAHO','Etienne','DAHO','e.daho@gmail.com','" + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + "');";
+    return results;
+}
 
-    connect.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
-    });
-});*/
+module.exports = {
+    query
+}

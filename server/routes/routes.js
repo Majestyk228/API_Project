@@ -1,5 +1,6 @@
 //IMPORTS
-const contact = require('./controllers/contacts/contacts.js');
+//const contact = require('../controllers/contacts/contacts.js');
+const contact = require('../services/contacts.js');
 const express = require('express');
 
 const router = express.Router();
@@ -7,7 +8,7 @@ const router = express.Router();
 //CONTACTS ROUTES
 //getAllContacts
 router.get('/contacts', (_, res) => {
-    res.send(JSON.stringify(contact.getAllContacts()));
+    res.send(contact.getAllContacts());
 });
 
 //insertContact
@@ -42,3 +43,5 @@ router.delete('/contacts/:id', (req, res) => {
 //Routes Models
 
 //Routes User
+
+module.exports = router;
