@@ -15,16 +15,17 @@ async function getAllContacts() {
 }
 
 async function insertContact(contactReq) {
-    const requete = "INSERT INTO contact (id, name, firstName, lastName, mail, creationDate) VALUES (NULL, '" + contactReq.name + "', '" + contactReq.firstName + "', '" + contactReq.lastName + "', '" + contactReq.mail + "','" + today + "');";
+    //SQL query structure
+    const requete = 'INSERT INTO contact (id, name, firstName, lastName, mail, creationDate) VALUES (null, "' + contactReq.name + '", "' + contactReq.firstName + '", "' + contactReq.lastName + '", "' + contactReq.mail + '","' + today + '");';
 
-    console.log("\n\n" + requete + "\n\n");
-
+    //sending query
     const results = await db.query(requete, "");
 
-    let message = 'Error in creating programming language';
+    //message to output at the end of the function
+    let message = 'Error in creating contact';
 
-    if (result.affectedRows) {
-        message = 'Programming language created successfully';
+    if (results.affectedRows) {
+        message = 'Contact created successfully';
     }
 
     return { message };
