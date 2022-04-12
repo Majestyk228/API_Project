@@ -1,31 +1,29 @@
 //IMPORTS
-//const contact = require('../controllers/contacts/contacts.js');
 const contact = require('../services/contacts.js');
 const express = require('express');
-
 const router = express.Router();
 
 //CONTACTS ROUTES
 //getAllContacts
-router.get('/contacts', (_, res) => {
-    res.send(contact.getAllContacts());
+router.get('/contacts', async function (_, res) {
+    try {
+        res.send(await contact.getAllContacts());
+    } catch (error) {
+        console.error(`Error while getting users `, err.message);
+        next(err);
+    }
 });
 
 //insertContact
-router.post('/contacts', (req, res) => {
-    const { name, firstname, lastname, mail } = req.body;
+router.post('/contacts', async function (req, res, next) {
+    //const { name, firstname, lastname, mail } = req.body;
 
-    const r = contact.insertContact(name, firstname, lastname, mail);
-
-    if (r instanceof Error) {
-        res.status(400);
-        res.send(r.message);
-        res.end();
-
-        return;
+    try {
+        res.send(await contact.insertContact(req.body));
+    } catch (error) {
+        console.error(`Error while creating programming language`);
+        next(error);
     }
-
-    res.send(r);
 });
 
 //deleteContact

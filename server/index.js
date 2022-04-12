@@ -1,5 +1,5 @@
 //IMPORTS
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const express = require('express');
 //const contact = require('./controllers/contacts.js');
 const dotenv = require('dotenv');
