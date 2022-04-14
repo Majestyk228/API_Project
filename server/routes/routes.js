@@ -3,9 +3,9 @@ const contact = require('../services/contacts.js');
 const list = require('../services/list.js');
 const messages = require('../services/messages.js');
 const models = require('../services/models.js');
-const user =require('../services/user.js');
-const send =require('../services/send.js');
-const contactList=require('../services/contactList.js');
+const state = require('../services/state.js');
+const send = require('../services/send.js');
+const contactList = require('../services/contactList.js');
 
 const express = require('express');
 const router = express.Router();
@@ -49,7 +49,7 @@ router.delete('/contacts/:id', (req, res) => {
 });
 
 // TODO updateContact
-router.put('/contacts', async function(req,res)  {
+router.put('/contacts', async function (req, res) {
     try {
         res.send(await contact.updateContact(req.body));
     } catch (error) {
@@ -98,7 +98,7 @@ router.delete('/list/:id', (req, res) => {
 });
 
 // TODO updateList
-router.put('/list', async function(req,res)  {
+router.put('/list', async function (req, res) {
     try {
         res.send(await list.updateList(req.body));
     } catch (error) {
@@ -145,7 +145,7 @@ router.delete('/messages/:id', (req, res) => {
 });
 
 // TODO updateMessages
-router.put('/messages', async function(req,res)  {
+router.put('/messages', async function (req, res) {
     try {
         res.send(await messages.updateMessages(req.body));
     } catch (error) {
@@ -192,7 +192,7 @@ router.delete('/models/:id', (req, res) => {
 });
 
 // TODO updateModels
-router.put('/models', async function(req,res)  {
+router.put('/models', async function (req, res) {
     try {
         res.send(await models.updateModels(req.body));
     } catch (error) {
@@ -201,49 +201,49 @@ router.put('/models', async function(req,res)  {
     }
 });
 
-//* Routes User
-// TODO getUser
-router.get('/user/:id', async function (_, res) {
+//* Routes State
+// TODO getState
+router.get('/state/:id', async function (_, res) {
     try {
-        res.send(await user.getUser(req.params.id));
+        res.send(await state.getState(req.params.id));
     } catch (error) {
-        console.error('Error while getting User', err.message);
+        console.error('Error while getting State', err.message);
         next(err);
     }
 });
-// TODO getAllUser
-router.get('/user', async function (_, res) {
+// TODO getAllState
+router.get('/state', async function (_, res) {
     try {
-        res.send(await user.getAllUser());
+        res.send(await state.getAllState());
     } catch (error) {
-        console.error('Error while getting User', err.message);
+        console.error('Error while getting State', err.message);
         next(err);
     }
 });
 
-// TODO insertUser
-router.post('/user', async function (req, res, next) {
+// TODO insertState
+router.post('/state', async function (req, res, next) {
     try {
-        res.send(await user.insertUser(req.body));
+        res.send(await state.insertState(req.body));
     } catch (error) {
-        console.error('Error while creating User');
+        console.error('Error while creating State');
         next(error);
     }
 });
 
-// TODO deleteUser
-router.delete('/user/:id', (req, res) => {
+// TODO deleteState
+router.delete('/state/:id', (req, res) => {
     const id = req.query.id;
 
-    res.send(user.deleteUser(id));
+    res.send(state.deleteState(id));
 });
 
-// TODO updateUser
-router.put('/user', async function(req,res)  {
+// TODO updateState
+router.put('/state', async function (req, res) {
     try {
-        res.send(await user.updateUser(req.body));
+        res.send(await state.updateState(req.body));
     } catch (error) {
-        console.error('Error while updating User');
+        console.error('Error while updating State');
         next(error);
     }
 });
@@ -259,7 +259,7 @@ router.get('/send/:id', async function (_, res) {
     }
 });
 // TODO getAllSend
-router.get('/user', async function (_, res) {
+router.get('/send', async function (_, res) {
     try {
         res.send(await send.getAllSend());
     } catch (error) {
@@ -286,9 +286,9 @@ router.delete('/send/:id', (req, res) => {
 });
 
 // TODO updateSend
-router.put('/send', async function(req,res)  {
+router.put('/send', async function (req, res) {
     try {
-        res.send(await user.updateSend(req.body));
+        res.send(await send.updateSend(req.body));
     } catch (error) {
         console.error('Error while updating Send');
         next(error);
@@ -334,9 +334,9 @@ router.delete('/contactList/:id', (req, res) => {
 });
 
 // TODO updateContactList
-router.put('/contactList', async function(req,res)  {
+router.put('/contactList', async function (req, res) {
     try {
-        res.send(await user.updateContactList(req.body));
+        res.send(await contactList.updateContactList(req.body));
     } catch (error) {
         console.error('Error while updating ContactList');
         next(error);
