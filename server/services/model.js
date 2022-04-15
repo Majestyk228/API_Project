@@ -2,18 +2,18 @@ const db = require('./database.js');
 const config = require('../../config/config.js');
 
 //give the model from the id given
-async function getmodel(id) {
+async function getModel(id) {
     const row = await db.query("Select * FROM model where id='" + id + "';");
     return row;
 
 }
 //gives the list of All model on the platform
-async function getAllmodel() {
+async function getAllModel() {
     const rows = await db.query("SELECT * FROM model;", "");
     return rows;
 }
 //insert the model in the database
-async function insertmodel(modelReq) {
+async function insertModel(modelReq) {
     //SQL query structure
     const requete = 'INSERT INTO model (id, name, filename) VALUES (null, "' + modelReq.name + '","' + modelReq.filename + '");';
 
@@ -31,7 +31,7 @@ async function insertmodel(modelReq) {
 
 }
 //delete the model
-async function deletemodel(id) {
+async function deleteModel(id) {
     //SQL query structure
     const requete = 'DELETE from model where id="' + id + '";';
 
@@ -49,7 +49,7 @@ async function deletemodel(id) {
 
 }
 //update the model
-async function updatemodel(modelReq) {
+async function updateModel(modelReq) {
     //SQL query structure
     const requete = 'update model SET name ="' + modelReq.name + '", filename="' + modelReq.filename + '" where id="' + modelReq.id + '";';
 
@@ -68,9 +68,9 @@ async function updatemodel(modelReq) {
 }
 
 module.exports = {
-    getmodel,
-    getAllmodel,
-    insertmodel,
-    deletemodel,
-    updatemodel
+    getModel,
+    getAllModel,
+    insertModel,
+    deleteModel,
+    updateModel
 };
