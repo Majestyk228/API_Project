@@ -2,7 +2,7 @@
 const contact = require('../services/contacts.js');
 const list = require('../services/list.js');
 const messages = require('../services/messages.js');
-const models = require('../services/models.js');
+const model = require('../services/model.js');
 const state = require('../services/state.js');
 const send = require('../services/send.js');
 const contactList = require('../services/contactList.js');
@@ -154,49 +154,49 @@ router.put('/messages', async function (req, res) {
     }
 });
 
-//* Routes Models
-// TODO getModels
-router.get('/models/:id', async function (_, res) {
+//* Routes Model
+// TODO getModel
+router.get('/model/:id', async function (_, res) {
     try {
-        res.send(await models.getModels(req.params.id));
+        res.send(await model.getModel(req.params.id));
     } catch (error) {
-        console.error('Error while getting Models', err.message);
+        console.error('Error while getting Model', err.message);
         next(err);
     }
 });
-// TODO getAllModels
-router.get('/models', async function (_, res) {
+// TODO getAllModel
+router.get('/model', async function (_, res) {
     try {
-        res.send(await models.getAllModels());
+        res.send(await model.getAllModel());
     } catch (error) {
-        console.error('Error while getting Models', err.message);
+        console.error('Error while getting Model', err.message);
         next(err);
     }
 });
 
-// TODO insertModels
-router.post('/models', async function (req, res, next) {
+// TODO insertModel
+router.post('/model', async function (req, res, next) {
     try {
-        res.send(await models.insertModels(req.body));
+        res.send(await model.insertModel(req.body));
     } catch (error) {
-        console.error('Error while creating Models');
+        console.error('Error while creating Model');
         next(error);
     }
 });
 
-// TODO deleteModels
-router.delete('/models/:id', (req, res) => {
+// TODO deleteModel
+router.delete('/model/:id', (req, res) => {
     const id = req.query.id;
 
-    res.send(models.deleteMessages(id));
+    res.send(model.deleteMessages(id));
 });
 
-// TODO updateModels
-router.put('/models', async function (req, res) {
+// TODO updateModel
+router.put('/model', async function (req, res) {
     try {
-        res.send(await models.updateModels(req.body));
+        res.send(await model.updateModel(req.body));
     } catch (error) {
-        console.error('Error while updating Models');
+        console.error('Error while updating Model');
         next(error);
     }
 });
