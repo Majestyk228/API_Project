@@ -14,6 +14,11 @@ async function getAllContacts() {
     return rows;
 }
 
+async function getContact(id) {
+    const rows = await db.query("SELECT * FROM contact where id = '" + id + "';", "");
+    return rows;
+}
+
 async function insertContact(contactReq) {
     //SQL query structure
     const requete = 'INSERT INTO contact (id, name, firstName, lastName, mail, creationDate) VALUES (null, "' + contactReq.name + '", "' + contactReq.firstName + '", "' + contactReq.lastName + '", "' + contactReq.mail + '","' + today + '");';
@@ -31,7 +36,48 @@ async function insertContact(contactReq) {
     return { message };
 }
 
+//delete the state
+async function deleteContact(id) {
+    //SQL query structure
+    console.log(id);
+    const requete = 'DELETE FROM contact where id ="' + id + '";';
+
+    //sending query
+    const results = await db.query(requete, "");
+
+    //message to output at the end of the function
+    let message = 'Error in deleting contact';
+
+    if (results.affectedRows) {
+        message = 'Contact deleted successfully';
+    }
+
+    return { message };
+}
+
+//update the Contact
+async function updateContact(contactReq) {
+    //SQL query structure
+    const requete = 'UPDATE contact SET name = "' + contactReq.name + '", firstName = "' + contactReq.firstName + '", lastName = "' + contactReq.lastName + '", mail = "' + contactReq.mail + '", creationDate = "' + today + '" WHERE id = "' + contactReq.id + '"';
+
+    //sending query
+    const results = await db.query(requete, "");
+
+    //message to output at the end of the function
+    let message = 'Error in updating contact';
+
+    if (results.affectedRows) {
+        message = 'Contact updated successfully';
+    }
+
+    return { message };
+
+}
+
 module.exports = {
     getAllContacts,
-    insertContact
+    insertContact,
+    getContact,
+    deleteContact,
+    updateContact
 };

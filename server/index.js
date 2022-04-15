@@ -1,13 +1,17 @@
 // * IMPORTS
 const mysql = require('mysql2');
 const express = require('express');
-////const contact = require('./controllers/contacts.js');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-const router = require('./routes/routes.js');
+const contactRouter = require('./routes/contactRoutes.js');
+const stateRouter = require('./routes/stateRoutes.js');
+const sendRouter = require('./routes/sendRoutes.js');
+const contactListRouter = require('./routes/contactListRoutes.js');
+const listRouter = require('./routes/listRoutes.js');
+const messageRouter = require('./routes/messageRoutes.js');
+const modelRouter = require('./routes/modelRoutes.js');
 
 // * Tools
-/////var today = new Date();
 dotenv.config();
 
 //APP
@@ -16,9 +20,15 @@ const port = process.env.PORT || 3000;
 
 // * Middlewares
 app.use(bodyParser.json());
-app.use("/", router);
+app.use("/contacts", contactRouter);
+app.use("/state", stateRouter);
+app.use("/send", sendRouter);
+app.use("/contactList", contactListRouter);
+app.use("/list", listRouter);
+app.use("/messages", messageRouter);
+app.use("/model", modelRouter);
 
 // * Écoute du serveur
 app.listen(port, () => {
-    console.log("port '" + port + "' en écoute");
+    console.log("Port '" + port + "' en écoute");
 })
