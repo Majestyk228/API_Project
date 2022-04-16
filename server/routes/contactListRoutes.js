@@ -5,12 +5,12 @@ contactListRouter = express.Router();
 
 // =============================================
 // TODO getContactList
-contactListRouter.get('/:id', async function (_, res) {
+contactListRouter.get('/:id', async function (req, res, next) {
 	try {
-		res.send(await contactList.getContacList(req.params.id));
+		res.send(await contactList.getContactList(req.params.id));
 	} catch (error) {
-		console.error('Error while getting ContactList', err.message);
-		next(err);
+		console.error('Error while getting ContactList', error.message);
+		next(error);
 	}
 });
 // TODO getAllContactList
@@ -34,10 +34,11 @@ contactListRouter.post('/', async function (req, res, next) {
 });
 
 // TODO deleteContactList
-contactListRouter.delete('/:id', (req, res) => {
-	const id = req.query.id;
+contactListRouter.delete('/:id/:id_contact', (req, res) => {
+	const id = req.params.id;
+	const id_contact = req.params.id_contact;
 
-	res.send(contactList.deleteContactList(id));
+	res.send(contactList.deleteContactList(id, id_contact));
 });
 
 // TODO updateContactList
