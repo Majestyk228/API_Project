@@ -14,10 +14,10 @@ modelRouter.get('/:id', async function (req, res, next) {
 	}
 });
 // TODO getAllModel
-modelRouter.get('/', async function (_, res) {
+modelRouter.get('/', async function (err, res) {
 	try {
 		res.send(await model.getAllModel());
-	} catch (error) {
+	} catch (err) {
 		console.error('Error while getting Model', err.message);
 		next(err);
 	}

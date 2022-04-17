@@ -1,20 +1,20 @@
 //IMPORTS
-const message = require('../services/messages.js');
+const messages = require('../services/messages.js');
 const express = require('express');
 messageRouter = express.Router();
 
 // =============================================
 // TODO getMessages
-messageRouter.get('/:id', async function (_, res) {
+messageRouter.get('/:id', async function (req, res,next) {
 	try {
 		res.send(await messages.getMessages(req.params.id));
 	} catch (error) {
-		console.error('Error while getting Messages', err.message);
-		next(err);
+		console.error('Error while getting Messages', error.message);
+		next(error);
 	}
 });
 // TODO getAllMessages
-messageRouter.get('/', async function (_, res) {
+messageRouter.get('/', async function (err, res) {
 	try {
 		res.send(await messages.getAllMessages());
 	} catch (error) {
@@ -34,14 +34,17 @@ messageRouter.post('/', async function (req, res, next) {
 });
 
 // TODO deleteMessages 
-messageRouter.delete('/:id', (req, res) => {
-	const id = req.query.id;
-
-	res.send(messages.deleteMessages(id));
+messageRouter.delete('/:id', async function (req, res,next)  {
+	try {
+		res.send(await messages.deleteMessages(req.params.id));
+	} catch (error) {
+		console.error('Error while deleting Messages', error.message);
+		next(error);
+	}
 });
 
 // TODO updateMessages
-messageRouter.put('/', async function (req, res) {
+messageRouter.put('/', async function (req, res,next) {
 	try {
 		res.send(await messages.updateMessages(req.body));
 	} catch (error) {
