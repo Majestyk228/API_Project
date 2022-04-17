@@ -5,12 +5,12 @@ modelRouter = express.Router();
 
 // =============================================
 // TODO getModel
-modelRouter.get('/:id', async function (_, res) {
+modelRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await model.getModel(req.params.id));
 	} catch (error) {
-		console.error('Error while getting Model', err.message);
-		next(err);
+		console.error('Error while getting Model', error.message);
+		next(error);
 	}
 });
 // TODO getAllModel
@@ -35,9 +35,9 @@ modelRouter.post('/', async function (req, res, next) {
 
 // TODO deleteModel
 modelRouter.delete('/:id', (req, res) => {
-	const id = req.query.id;
+	const id = req.params.id;
 
-	res.send(model.deleteMessages(id));
+	res.send(model.deleteModel(id));
 });
 
 // TODO updateModel

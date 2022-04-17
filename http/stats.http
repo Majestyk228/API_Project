@@ -1,0 +1,3 @@
+###
+# GET LIST OF ALL STATS
+GET http://localhost:3000/stats HTTP/1.1

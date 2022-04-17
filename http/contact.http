@@ -1,0 +1,40 @@
+###
+# GET A LIST OF ALL CONTACTS
+GET http://localhost:3000/contacts HTTP/1.1
+
+
+###
+# GET A CONTACT
+GET http://localhost:3000/contacts/3 HTTP/1.1
+
+
+###
+# ADD A CONTACT
+POST http://localhost:3000/contacts HTTP/1.1
+content-type: application/json
+
+{
+	"name": "Celine DION",
+	"firstName": "Celine",
+	"lastName": "DION",
+	"mail": "cdion@gmail.com"
+}
+
+
+###
+# UPDATE A CONTACT
+PUT http://localhost:3000/contacts HTTP/1.1
+content-type: application/json
+
+{
+	"id": 5,
+	"name": "Celine DIOA",
+	"firstName": "Celine",
+	"lastName": "DIOA",
+	"mail": "cdioa@gmail.com"
+}
+
+
+###
+# DELETE A CONTACT
+DELETE http://localhost:3000/contacts/5 HTTP/1.1

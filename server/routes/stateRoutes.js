@@ -5,12 +5,12 @@ stateRouter = express.Router();
 
 // =============================================
 // TODO getState
-stateRouter.get('/:id', async function (_, res) {
+stateRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await state.getState(req.params.id));
 	} catch (error) {
-		console.error('Error while getting State', err.message);
-		next(err);
+		console.error('Error while getting State', error.message);
+		next(error);
 	}
 });
 // TODO getAllState
@@ -35,7 +35,7 @@ stateRouter.post('/', async function (req, res, next) {
 
 // TODO deleteState
 stateRouter.delete('/:id', (req, res) => {
-	const id = req.query.id;
+	const id = req.params.id;
 
 	res.send(state.deleteState(id));
 });

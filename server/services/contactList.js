@@ -50,7 +50,7 @@ async function deleteContactList(id, id_contact) {
 //update the Contact
 async function updateContactList(contactListReq) {
 	//SQL query structure
-	const requete = 'UPDATE rel_contact_list SET id_contact = "' + contactListReq.id_contact + '", label = "' + contactListReq.label + '" WHERE id = "' + contactListReq.id + '"';
+	const requete = 'UPDATE rel_contact_list SET label = "' + contactListReq.label + '" WHERE id = "' + contactListReq.id + '" and id_contact = "' + contactListReq.id_contact + '";';
 
 	//sending query
 	const results = await db.query(requete, "");

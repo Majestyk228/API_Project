@@ -57,10 +57,10 @@ async function updateModel(modelReq) {
     const results = await db.query(requete, "");
 
     //message to output at the end of the function
-    let message = 'Error in deleting model';
+    let message = 'Error in updating model';
 
     if (results.affectedRows) {
-        message = 'model deleted successfully';
+        message = 'model updated successfully';
     }
 
     return { message };

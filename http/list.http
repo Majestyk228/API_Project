@@ -1,0 +1,36 @@
+###
+# GET LIST OF ALL LISTS
+GET http://localhost:3000/list HTTP/1.1
+
+
+###
+# GET A LIST
+GET http://localhost:3000/list/1 HTTP/1.1
+
+
+###
+# ADD A LIST
+POST http://localhost:3000/list HTTP/1.1
+content-type : application/json
+
+{
+	"name":"my fourth list",
+	"description":"this is the description of my fourth list. I will stop it here ! XOXO"
+}
+
+
+###
+# UPDATE A LIST
+PUT http://localhost:3000/list HTTP/1.1
+content-type : application/json
+
+{
+	"id":3,
+	"name":"my third EDITED list",
+	"description":"Thanos did nothing wrong HIHI"
+}
+
+
+###
+# DELETE A LIST
+DELETE http://localhost:3000/list/2 HTTP/1.1

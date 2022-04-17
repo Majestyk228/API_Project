@@ -1,0 +1,33 @@
+###
+# GET LIST OF ALL STATES
+GET http://localhost:3000/state
+
+
+###
+# GET A STATE
+GET http://localhost:3000/state/2
+
+
+###
+# ADD A STATE
+POST http://localhost:3000/state
+content-type : application/json
+
+{
+	"label":"waiting"
+}
+
+
+###
+# UPDATE A STATE
+PUT http://localhost:3000/state
+content-type : application/json
+
+{
+	"id":1,
+	"label":"sent"
+}
+
+###
+# DELETE A STATE
+DELETE http://localhost:3000/state/1

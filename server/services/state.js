@@ -15,7 +15,7 @@ async function getAllState() {
 //insert the state in the database
 async function insertState(stateReq) {
     //SQL query structure
-    const requete = 'INSERT INTO state (id, label) VALUES (null, "' + stateReq.name + '");';
+    const requete = 'INSERT INTO state (id, label) VALUES (null, "' + stateReq.label + '");';
 
     //sending query
     const results = await db.query(requete, "");
@@ -57,10 +57,10 @@ async function updateState(stateReq) {
     const results = await db.query(requete, "");
 
     //message to output at the end of the function
-    let message = 'Error in deleting state';
+    let message = 'Error in updating state';
 
     if (results.affectedRows) {
-        message = 'State deleted successfully';
+        message = 'State updated successfully';
     }
 
     return { message };

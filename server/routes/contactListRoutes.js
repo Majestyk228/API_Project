@@ -42,7 +42,7 @@ contactListRouter.delete('/:id/:id_contact', (req, res) => {
 });
 
 // TODO updateContactList
-contactListRouter.put('/', async function (req, res) {
+contactListRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await contactList.updateContactList(req.body));
 	} catch (error) {

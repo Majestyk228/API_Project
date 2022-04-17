@@ -10,6 +10,7 @@ const contactListRouter = require('./routes/contactListRoutes.js');
 const listRouter = require('./routes/listRoutes.js');
 const messageRouter = require('./routes/messageRoutes.js');
 const modelRouter = require('./routes/modelRoutes.js');
+const statsRouter = require('./routes/statsRoutes.js');
 
 // * Tools
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/contactList", contactListRouter);
 app.use("/list", listRouter);
 app.use("/messages", messageRouter);
 app.use("/model", modelRouter);
+app.use("/stats", statsRouter);
 
 // * Écoute du serveur
 app.listen(port, () => {

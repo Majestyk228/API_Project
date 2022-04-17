@@ -1,0 +1,36 @@
+###
+# GET LIST OF ALL MODELS
+GET http://localhost:3000/model HTTP/1.1
+
+
+###
+# GET A MODEL
+GET http://localhost:3000/model/2 HTTP/1.1
+
+
+###
+# ADD A MODEL
+POST http://localhost:3000/model HTTP/1.1
+content-type : application/json
+
+{
+	"name":"My second model",
+	"filename":"my_second_model.txt"
+}
+
+
+###
+# UPDATE A MODEL
+PUT http://localhost:3000/model
+content-type : application/json
+
+{
+	"id":2,
+	"name":"My second EDITED model",
+	"filename":"my_new_model.txt"
+}
+
+
+###
+# DELETE A MODEL
+DELETE http://localhost:3000/model/2
