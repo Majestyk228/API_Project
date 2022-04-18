@@ -2,14 +2,45 @@
 # GET LIST OF ALL MESSAGES
 
 GET http://localhost:3000/messages HTTP/1.1
+
+
 ###
 # GET A MESSAGE
 GET http://localhost:3000/messages/1 HTTP/1.1
+
+
 ###
 # ADD A MESSAGE
+POST http://localhost:3000/messages HTTP/1.1
+content-type : application/json
+
+{
+	"object":"second message",
+	"content":"this is the content of the second message",
+	"id_list":1,
+	"id_state":2,
+	"id_model":1
+}
+
 
 ###
 # UPDATE A MESSAGE
+PUT http://localhost:3000/messages HTTP/1.1
+content-type : application/json
+###(, object,content,,,id_list,id_state,id_model)
+###
+{
+    "id": 1,
+    "object": "first message EDITED",
+    "content": "this is the  NEW content of the first message",
+    "sendDate": "2022-04-17T22:00:00.000Z",
+    "sendHour": "2022-04-18T17:09:58.000Z",
+    "id_list": 1,
+    "id_state": 2,
+    "id_model": 1
+}
+
 
 ###
 # DELETE A MESSAGE
+DELETE http://localhost:3000/messages/2
