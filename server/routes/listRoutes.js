@@ -41,7 +41,7 @@ listRouter.delete('/:id', (req, res) => {
 });
 
 // TODO updateList
-listRouter.put('/', async function (req, res) {
+listRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await list.updateList(req.body));
 	} catch (error) {

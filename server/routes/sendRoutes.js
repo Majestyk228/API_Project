@@ -5,12 +5,12 @@ sendRouter = express.Router();
 
 // =============================================
 // TODO getSend
-sendRouter.get('/:id', async function (_, res) {
+sendRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await send.getSend(req.params.id));
 	} catch (error) {
-		console.error('Error while getting Send', err.message);
-		next(err);
+		console.error('Error while getting Send', error.message);
+		next(error);
 	}
 });
 // TODO getAllSend
@@ -18,8 +18,8 @@ sendRouter.get('/', async function (_, res) {
 	try {
 		res.send(await send.getAllSend());
 	} catch (error) {
-		console.error('Error while getting Send', err.message);
-		next(err);
+		console.error('Error while getting Send', error.message);
+		next(error);
 	}
 });
 
@@ -41,7 +41,7 @@ sendRouter.delete('/:id', (req, res) => {
 });
 
 // TODO updateSend
-sendRouter.put('/', async function (req, res) {
+sendRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await send.updateSend(req.body));
 	} catch (error) {

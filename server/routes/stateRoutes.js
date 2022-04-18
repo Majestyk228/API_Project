@@ -14,12 +14,12 @@ stateRouter.get('/:id', async function (req, res, next) {
 	}
 });
 // TODO getAllState
-stateRouter.get('/', async function (_, res) {
+stateRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await state.getAllState());
 	} catch (error) {
-		console.error('Error while getting State', err.message);
-		next(err);
+		console.error('Error while getting State', error.message);
+		next(error);
 	}
 });
 
@@ -41,7 +41,7 @@ stateRouter.delete('/:id', (req, res) => {
 });
 
 // TODO updateState
-stateRouter.put('/', async function (req, res) {
+stateRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await state.updateState(req.body));
 	} catch (error) {

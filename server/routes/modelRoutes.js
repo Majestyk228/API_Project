@@ -14,12 +14,12 @@ modelRouter.get('/:id', async function (req, res, next) {
 	}
 });
 // TODO getAllModel
-modelRouter.get('/', async function (err, res) {
+modelRouter.get('/', async function (err, res, next) {
 	try {
 		res.send(await model.getAllModel());
 	} catch (err) {
-		console.error('Error while getting Model', err.message);
-		next(err);
+		console.error('Error while getting Model', error.message);
+		next(error);
 	}
 });
 
@@ -41,7 +41,7 @@ modelRouter.delete('/:id', (req, res) => {
 });
 
 // TODO updateModel
-modelRouter.put('/', async function (req, res) {
+modelRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await model.updateModel(req.body));
 	} catch (error) {

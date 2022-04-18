@@ -5,7 +5,7 @@ contactRouter = express.Router();
 
 // =============================================
 // TODO getContact 
-contactRouter.get('/:id', async function (req, res) {
+contactRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await contact.getContact(req.params.id));
 	} catch (error) {
@@ -14,17 +14,17 @@ contactRouter.get('/:id', async function (req, res) {
 	}
 });
 //getAllContacts
-contactRouter.get('/', async function (_, res) {
+contactRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await contact.getAllContacts());
 	} catch (error) {
-		console.error('Error while getting contacts', err.message);
-		next(err);
+		console.error('Error while getting contacts', error.message);
+		next(error);
 	}
 });
 
 //getContacts
-contactRouter.get('/:id', async function (req, res) {
+contactRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await contact.getContact(req.query.id));
 	} catch (error) {
@@ -44,7 +44,7 @@ contactRouter.post('/', async function (req, res, next) {
 });
 
 // TODO deleteContact 
-contactRouter.delete('/:id', async function (req, res) {
+contactRouter.delete('/:id', async function (req, res, next) {
 	try {
 		res.send(contact.deleteContact(req.params.id));
 	} catch (error) {

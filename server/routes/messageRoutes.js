@@ -5,7 +5,7 @@ messageRouter = express.Router();
 
 // =============================================
 // TODO getMessages
-messageRouter.get('/:id', async function (req, res,next) {
+messageRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await messages.getMessages(req.params.id));
 	} catch (error) {
@@ -14,12 +14,12 @@ messageRouter.get('/:id', async function (req, res,next) {
 	}
 });
 // TODO getAllMessages
-messageRouter.get('/', async function (err, res) {
+messageRouter.get('/', async function (err, res, next) {
 	try {
 		res.send(await messages.getAllMessages());
 	} catch (error) {
-		console.error('Error while getting Messages', err.message);
-		next(err);
+		console.error('Error while getting Messages', error.message);
+		next(error);
 	}
 });
 
@@ -34,7 +34,7 @@ messageRouter.post('/', async function (req, res, next) {
 });
 
 // TODO deleteMessages 
-messageRouter.delete('/:id', async function (req, res,next)  {
+messageRouter.delete('/:id', async function (req, res, next) {
 	try {
 		res.send(await messages.deleteMessages(req.params.id));
 	} catch (error) {
@@ -44,7 +44,7 @@ messageRouter.delete('/:id', async function (req, res,next)  {
 });
 
 // TODO updateMessages
-messageRouter.put('/', async function (req, res,next) {
+messageRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await messages.updateMessages(req.body));
 	} catch (error) {

@@ -14,12 +14,12 @@ contactListRouter.get('/:id', async function (req, res, next) {
 	}
 });
 // TODO getAllContactList
-contactListRouter.get('/', async function (_, res) {
+contactListRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await contactList.getAllContactList());
 	} catch (error) {
-		console.error('Error while getting ContactList', err.message);
-		next(err);
+		console.error('Error while getting ContactList', error.message);
+		next(error);
 	}
 });
 
