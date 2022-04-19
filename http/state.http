@@ -14,7 +14,7 @@ POST http://localhost:3000/state
 content-type : application/json
 
 {
-	"label":"waiting"
+	"label":"sent"
 }
 
 

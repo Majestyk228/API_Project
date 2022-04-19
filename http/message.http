@@ -27,7 +27,6 @@ content-type : application/json
 # UPDATE A MESSAGE
 PUT http://localhost:3000/messages HTTP/1.1
 content-type : application/json
-###(, object,content,,,id_list,id_state,id_model)
 ###
 {
     "id": 1,
@@ -44,3 +43,15 @@ content-type : application/json
 ###
 # DELETE A MESSAGE
 DELETE http://localhost:3000/messages/2
+
+
+###
+# UPDATE A MESSAGE'S STATUS
+PUT http://localhost:3000/messages/send HTTP/1.1
+content-type : application/json
+
+{
+    "id": 1,
+    "id_state": 2
+}
+

@@ -52,6 +52,17 @@ messageRouter.put('/', async function (req, res, next) {
 		next(error);
 	}
 });
+
+// TODO updateMessages
+messageRouter.put('/send', async function (req, res, next) {
+	try {
+		res.send(await messages.updateMessageStatus(req.body));
+	} catch (error) {
+		console.error('Error while updating Messages');
+		next(error);
+	}
+});
+
 // =============================================
 
 module.exports = messageRouter;

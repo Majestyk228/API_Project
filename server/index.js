@@ -13,6 +13,9 @@ const modelRouter = require('./routes/modelRoutes.js');
 const statsRouter = require('./routes/statsRoutes.js');
 const swaggerUI = require('swagger-ui-express');
 const docs = require('./docs/index.js');
+const cron = require('node-cron');
+const axios = require('axios');
+
 
 // * Tools
 dotenv.config();
@@ -36,4 +39,15 @@ app.use("/swagger", swaggerUI.serve, swaggerUI.setup(docs));
 // * Écoute du serveur
 app.listen(port, () => {
     console.log("Port '" + port + "' en écoute");
+    // Schedule tasks to be run on the server.
+    cron.schedule('3 * * * * *', function () {
+        //console.log('running a task every second');
+
+        axios.get('http://localhost:3000/messages').then(resp => {
+            console.log(resp.data);
+            resp.data.forEach(element => {
+                axios.put("http://localhost:3000/messages/send", { "id": element.id, "id_state": 3 });
+            });
+        });
+    });
 })
