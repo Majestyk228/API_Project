@@ -11,8 +11,8 @@ const listRouter = require('./routes/listRoutes.js');
 const messageRouter = require('./routes/messageRoutes.js');
 const modelRouter = require('./routes/modelRoutes.js');
 const statsRouter = require('./routes/statsRoutes.js');
-//const swaggerUI = require('swagger');
-//const docs = require('./docs/index.js');
+const swaggerUI = require('swagger-ui-express');
+const docs = require('./docs/index.js');
 
 // * Tools
 dotenv.config();
@@ -31,7 +31,7 @@ app.use("/list", listRouter);
 app.use("/messages", messageRouter);
 app.use("/model", modelRouter);
 app.use("/stats", statsRouter);
-//app.use("/swager", swaggerUI.serve, swaggerUI.setup(docs));
+app.use("/swagger", swaggerUI.serve, swaggerUI.setup(docs));
 
 // * Écoute du serveur
 app.listen(port, () => {
