@@ -3,8 +3,10 @@ const model = require('../services/model.js');
 const express = require('express');
 modelRouter = express.Router();
 
-// =============================================
-// TODO getModel
+// =================================================================================
+
+
+// * getModel
 modelRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await model.getModel(req.params.id));
@@ -13,7 +15,9 @@ modelRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-// TODO getAllModel
+
+
+// * getAllModel
 modelRouter.get('/', async function (err, res, next) {
 	try {
 		res.send(await model.getAllModel());
@@ -23,7 +27,8 @@ modelRouter.get('/', async function (err, res, next) {
 	}
 });
 
-// TODO insertModel
+
+// * insertModel
 modelRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await model.insertModel(req.body));
@@ -33,14 +38,21 @@ modelRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteModel
-modelRouter.delete('/:id', (req, res) => {
+
+// * deleteModel
+modelRouter.delete('/:id', async function (req, res, next) {
 	const id = req.params.id;
 
-	res.send(model.deleteModel(id));
+	try {
+		res.send(model.deleteModel(id));
+	} catch (error) {
+		console.error('Error while deleting Model');
+		next(error);
+	}
 });
 
-// TODO updateModel
+
+// * updateModel
 modelRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await model.updateModel(req.body));
@@ -49,6 +61,8 @@ modelRouter.put('/', async function (req, res, next) {
 		next(error);
 	}
 });
-// =============================================
+
+
+// =================================================================================
 
 module.exports = modelRouter;

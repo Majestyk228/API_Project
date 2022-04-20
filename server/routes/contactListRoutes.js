@@ -3,8 +3,10 @@ const contactList = require('../services/contactList.js');
 const express = require('express');
 contactListRouter = express.Router();
 
-// =============================================
-// TODO getContactList
+// =================================================================================
+
+
+// * getContactList
 contactListRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await contactList.getContactList(req.params.id));
@@ -13,7 +15,9 @@ contactListRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-// TODO getAllContactList
+
+
+// * getAllContactList
 contactListRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await contactList.getAllContactList());
@@ -23,7 +27,8 @@ contactListRouter.get('/', async function (_, res, next) {
 	}
 });
 
-// TODO insertContactList
+
+// * insertContactList
 contactListRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await contactList.insertContactList(req.body));
@@ -33,15 +38,22 @@ contactListRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteContactList
-contactListRouter.delete('/:id/:id_contact', (req, res) => {
+
+// * deleteContactList
+contactListRouter.delete('/:id/:id_contact', async function (req, res, next) {
 	const id = req.params.id;
 	const id_contact = req.params.id_contact;
 
-	res.send(contactList.deleteContactList(id, id_contact));
+	try {
+		res.send(contactList.deleteContactList(id, id_contact));
+	} catch (error) {
+		console.error('Error while deleting ContactList');
+		next(error);
+	}
 });
 
-// TODO updateContactList
+
+// * updateContactList
 contactListRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await contactList.updateContactList(req.body));
@@ -50,6 +62,8 @@ contactListRouter.put('/', async function (req, res, next) {
 		next(error);
 	}
 });
-// =============================================
+
+
+// =================================================================================
 
 module.exports = contactListRouter;

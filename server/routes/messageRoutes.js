@@ -1,10 +1,13 @@
 //IMPORTS
 const messages = require('../services/messages.js');
 const express = require('express');
+const jwt = require('../../utils/jwt.utils.js');
 messageRouter = express.Router();
 
-// =============================================
-// TODO getMessages
+// =================================================================================
+
+
+// * getMessages
 messageRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await messages.getMessages(req.params.id));
@@ -13,7 +16,9 @@ messageRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-// TODO getAllMessages
+
+
+// * getAllMessages
 messageRouter.get('/', async function (err, res, next) {
 	try {
 		res.send(await messages.getAllMessages());
@@ -23,7 +28,8 @@ messageRouter.get('/', async function (err, res, next) {
 	}
 });
 
-// TODO insertMessages
+
+// * insertMessages
 messageRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await messages.insertMessages(req.body));
@@ -33,7 +39,8 @@ messageRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteMessages 
+
+// * deleteMessages 
 messageRouter.delete('/:id', async function (req, res, next) {
 	try {
 		res.send(await messages.deleteMessages(req.params.id));
@@ -43,7 +50,8 @@ messageRouter.delete('/:id', async function (req, res, next) {
 	}
 });
 
-// TODO updateMessages
+
+// * updateMessages
 messageRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await messages.updateMessages(req.body));
@@ -53,7 +61,8 @@ messageRouter.put('/', async function (req, res, next) {
 	}
 });
 
-// TODO updateMessages
+
+// * updateMessages
 messageRouter.put('/send', async function (req, res, next) {
 	try {
 		res.send(await messages.updateMessageStatus(req.body));
@@ -63,6 +72,19 @@ messageRouter.put('/send', async function (req, res, next) {
 	}
 });
 
-// =============================================
+
+// * getTokenRoute
+messageRouter.get('/token', async function (_, res, next) {
+	try {
+		console.log(here);
+		res.send(await jwt.createToken());
+	} catch (error) {
+		console.error('Error while creating token');
+		next(error);
+	}
+});
+
+
+// =================================================================================
 
 module.exports = messageRouter;

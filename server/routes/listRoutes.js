@@ -3,8 +3,10 @@ const list = require('../services/list.js');
 const express = require('express');
 listRouter = express.Router();
 
-// =============================================
-// TODO getList 
+// =================================================================================
+
+
+// * getList 
 listRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await list.getList(req.params.id));
@@ -13,7 +15,9 @@ listRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-// TODO getAllList
+
+
+// * getAllList
 listRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await list.getAllList());
@@ -23,7 +27,8 @@ listRouter.get('/', async function (_, res, next) {
 	}
 });
 
-// TODO insertList
+
+// * insertList
 listRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await list.insertList(req.body));
@@ -33,14 +38,20 @@ listRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteList 
-listRouter.delete('/:id', (req, res) => {
-	const id = req.params.id;
 
-	res.send(list.deleteList(id));
+// * deleteList 
+listRouter.delete('/:id', async function (req, res, next) {
+	const id = req.params.id;
+	try {
+		res.send(list.deleteList(id));
+	} catch (error) {
+		console.error('Error while deleting List');
+		next(error);
+	}
 });
 
-// TODO updateList
+
+// * updateList
 listRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await list.updateList(req.body));
@@ -49,6 +60,8 @@ listRouter.put('/', async function (req, res, next) {
 		next(error);
 	}
 });
-// =============================================
+
+
+// =================================================================================
 
 module.exports = listRouter;

@@ -4,6 +4,9 @@ const config = {
         user: "root",
         password: "",
         database: "api",
+    },
+    jwt: {
+        signString: "9E9u9JLz2ZpWjvM2na94vqlcejbk"
     }
 };
 

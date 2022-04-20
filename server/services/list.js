@@ -8,18 +8,29 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 
-//give the list from the id given
+
+
+// =================================================================================
+
+
+//gets one list from id passed in parameter
 async function getList(id) {
 	const row = await db.query("Select * FROM list WHERE id='" + id + "';");
 	return row;
 
-}
-//gives the list of All lists on the platform
+};
+
+
+
+//gets all lists
 async function getAllList() {
 	const rows = await db.query("SELECT * FROM list;", "");
 	return rows;
-}
-//insert the list in the database
+};
+
+
+
+//adds one list in db from request body passed in parameter
 async function insertList(listReq) {
 	//SQL query structure
 	const requete = 'INSERT INTO list (id, name, description, creationDate) VALUES (NULL, "' + listReq.name + '" , "' + listReq.description + '", "' + today + '");';
@@ -35,9 +46,11 @@ async function insertList(listReq) {
 	}
 
 	return { message };
+};
 
-}
-//delete the model
+
+
+//deletes the list specified in id passed in parameter
 async function deleteList(id) {
 	//SQL query structure
 	const requete = 'DELETE FROM list WHERE id="' + id + '";';
@@ -53,9 +66,11 @@ async function deleteList(id) {
 	}
 
 	return { message };
+};
 
-}
-//update the model
+
+
+//updates the list specified in request body passed in parameter
 async function updateList(listReq) {
 	//SQL query structure
 	const requete = 'UPDATE list SET name = "' + listReq.name + '", description = "' + listReq.description + '", creationDate = "' + today + '" WHERE id = "' + listReq.id + '";';
@@ -71,9 +86,12 @@ async function updateList(listReq) {
 	}
 
 	return { message };
+};
 
-}
 
+// =================================================================================
+
+//EXPORT
 module.exports = {
 	getList,
 	getAllList,

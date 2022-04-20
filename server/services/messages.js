@@ -1,7 +1,9 @@
+//IMPORTS
 const db = require('./database.js');
 const config = require('../../config/config.js');
+const jwt = require('jsonwebtoken');
 
-//récupération de la date courante
+//getting current date and time
 var today = new Date();
 var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -11,19 +13,29 @@ today = yyyy + '-' + mm + '-' + dd;
 var Datetime = (today + ' ' + time);
 
 
-//give the messages from the id given
+
+// =================================================================================
+
+
+
+//gets the message from the id given
 async function getMessages(id) {
 
     const rows = await db.query("SELECT * FROM message where id = '" + id + "';", "");
     return rows;
+};
 
-}
-//gives the list of All messages on the platform
+
+
+//gets all messages
 async function getAllMessages() {
     const rows = await db.query("SELECT * FROM message;", "");
     return rows;
-}
-//insert the messages in the database
+};
+
+
+
+//adds one message in db from request body passed in parameter
 async function insertMessages(messagesReq) {
 
     //SQL query structure
@@ -40,9 +52,11 @@ async function insertMessages(messagesReq) {
     }
 
     return { message };
+};
 
-}
-//delete the messages
+
+
+//deletes the message specified in id passed in parameter
 async function deleteMessages(id) {
     //SQL query structure
     const requete = 'DELETE from message where id="' + id + '";';
@@ -75,26 +89,39 @@ async function updateMessages(messagesReq) {
     }
 
     return { message };
-}
+};
 
-//update the messages
+
+
+//updates the message specified in request body passed in parameter
 async function updateMessageStatus(messagesReq) {
+    //message to output at the end of the function
+    let message = 'Error in updating messages';
+
+    //verifying token validity
+    try {
+        jwt.verify(messagesReq.token, config.jwt.signString);
+    } catch (error) {
+        message = 'Error while verifying token';
+        return message;
+    }
+
     //SQL query structure
     const requete = 'update message SET id_state =' + messagesReq.id_state + ' where id=' + messagesReq.id + ';';
     //sending query
     const results = await db.query(requete, "");
-
-    //message to output at the end of the function
-    let message = 'Error in updating messages';
 
     if (results.affectedRows) {
         message = 'Messages updated successfully';
     }
 
     return { message };
-}
+};
 
 
+// =================================================================================
+
+//EXPORTS
 module.exports = {
     getMessages,
     getAllMessages,

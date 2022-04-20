@@ -1,18 +1,28 @@
+//IMPORTS
 const db = require('./database.js');
-const config = require('../../config/config.js');
 
-//give the model from the id given
+
+// =================================================================================
+
+
+
+//gets one model from id passed in parameter
 async function getModel(id) {
     const row = await db.query("Select * FROM model where id='" + id + "';");
     return row;
+};
 
-}
-//gives the list of All model on the platform
+
+
+//gets all models
 async function getAllModel() {
     const rows = await db.query("SELECT * FROM model;", "");
     return rows;
-}
-//insert the model in the database
+};
+
+
+
+//adds one model in db from request body passed in parameter
 async function insertModel(modelReq) {
     //SQL query structure
     const requete = 'INSERT INTO model (id, name, filename) VALUES (null, "' + modelReq.name + '","' + modelReq.filename + '");';
@@ -28,9 +38,11 @@ async function insertModel(modelReq) {
     }
 
     return { message };
+};
 
-}
-//delete the model
+
+
+//deletes the model specified in id passed in parameter
 async function deleteModel(id) {
     //SQL query structure
     const requete = 'DELETE from model where id="' + id + '";';
@@ -46,9 +58,11 @@ async function deleteModel(id) {
     }
 
     return { message };
+};
 
-}
-//update the model
+
+
+//updates the model specified in request body passed in parameter
 async function updateModel(modelReq) {
     //SQL query structure
     const requete = 'update model SET name ="' + modelReq.name + '", filename="' + modelReq.filename + '" where id="' + modelReq.id + '";';
@@ -64,9 +78,13 @@ async function updateModel(modelReq) {
     }
 
     return { message };
+};
 
-}
 
+// =================================================================================
+
+
+//EXPORTS
 module.exports = {
     getModel,
     getAllModel,

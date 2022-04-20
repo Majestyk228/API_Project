@@ -3,8 +3,10 @@ const state = require('../services/state.js');
 const express = require('express');
 stateRouter = express.Router();
 
-// =============================================
-// TODO getState
+// =================================================================================
+
+
+// * getState
 stateRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await state.getState(req.params.id));
@@ -13,7 +15,9 @@ stateRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-// TODO getAllState
+
+
+// * getAllState
 stateRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await state.getAllState());
@@ -23,7 +27,8 @@ stateRouter.get('/', async function (_, res, next) {
 	}
 });
 
-// TODO insertState
+
+// * insertState
 stateRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await state.insertState(req.body));
@@ -33,14 +38,20 @@ stateRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteState
-stateRouter.delete('/:id', (req, res) => {
-	const id = req.params.id;
 
-	res.send(state.deleteState(id));
+// * deleteState
+stateRouter.delete('/:id', async function (req, res, next) {
+	const id = req.params.id;
+	try {
+		res.send(state.deleteState(id));
+	} catch (error) {
+		console.error('Error while deleting State');
+		next(error);
+	}
 });
 
-// TODO updateState
+
+// * updateState
 stateRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await state.updateState(req.body));
@@ -49,6 +60,8 @@ stateRouter.put('/', async function (req, res, next) {
 		next(error);
 	}
 });
-// =============================================
+
+
+// =================================================================================
 
 module.exports = stateRouter;

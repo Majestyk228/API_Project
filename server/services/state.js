@@ -1,18 +1,29 @@
+//IMPORTS
 const db = require('./database.js');
 const config = require('../../config/config.js');
 
-//give the state from the id given
+
+// =================================================================================
+
+
+
+//gets one state from id passed in parameter
 async function getState(id) {
     const row = await db.query("Select * FROM state where id='" + id + "';");
     return row;
+};
 
-}
-//gives the list of All state on the platform
+
+
+//gets all states
 async function getAllState() {
     const rows = await db.query("SELECT * FROM state;", "");
     return rows;
-}
-//insert the state in the database
+};
+
+
+
+//adds one state in db from request body passed in parameter
 async function insertState(stateReq) {
     //SQL query structure
     const requete = 'INSERT INTO state (id, label) VALUES (null, "' + stateReq.label + '");';
@@ -28,9 +39,11 @@ async function insertState(stateReq) {
     }
 
     return { message };
+};
 
-}
-//delete the state
+
+
+//deletes the state specified in id passed in parameter
 async function deleteState(id) {
     //SQL query structure
     const requete = 'DELETE from state where id="' + id + '";';
@@ -46,9 +59,11 @@ async function deleteState(id) {
     }
 
     return { message };
+};
 
-}
-//update the state
+
+
+//updates the state specified in request body passed in parameter
 async function updateState(stateReq) {
     //SQL query structure
     const requete = 'update state SET label ="' + stateReq.label + '"where id="' + stateReq.id + '";';
@@ -64,9 +79,12 @@ async function updateState(stateReq) {
     }
 
     return { message };
+};
 
-}
 
+// =================================================================================
+
+//EXPORTS
 module.exports = {
     getState,
     getAllState,

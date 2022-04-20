@@ -3,8 +3,10 @@ const contact = require('../services/contacts.js');
 const express = require('express');
 contactRouter = express.Router();
 
-// =============================================
-// TODO getContact 
+// =================================================================================
+
+
+// * getContact 
 contactRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await contact.getContact(req.params.id));
@@ -13,7 +15,9 @@ contactRouter.get('/:id', async function (req, res, next) {
 		next(error);
 	}
 });
-//getAllContacts
+
+
+// * getAllContacts
 contactRouter.get('/', async function (_, res, next) {
 	try {
 		res.send(await contact.getAllContacts());
@@ -23,7 +27,8 @@ contactRouter.get('/', async function (_, res, next) {
 	}
 });
 
-//getContacts
+
+// * getContacts
 contactRouter.get('/:id', async function (req, res, next) {
 	try {
 		res.send(await contact.getContact(req.query.id));
@@ -33,7 +38,8 @@ contactRouter.get('/:id', async function (req, res, next) {
 	}
 });
 
-//insertContact
+
+// * insertContact
 contactRouter.post('/', async function (req, res, next) {
 	try {
 		res.send(await contact.insertContact(req.body));
@@ -43,7 +49,8 @@ contactRouter.post('/', async function (req, res, next) {
 	}
 });
 
-// TODO deleteContact 
+
+// * deleteContact 
 contactRouter.delete('/:id', async function (req, res, next) {
 	try {
 		res.send(contact.deleteContact(req.params.id));
@@ -53,7 +60,8 @@ contactRouter.delete('/:id', async function (req, res, next) {
 	}
 });
 
-// TODO updateContact
+
+// * updateContact
 contactRouter.put('/', async function (req, res, next) {
 	try {
 		res.send(await contact.updateContact(req.body));
@@ -63,6 +71,7 @@ contactRouter.put('/', async function (req, res, next) {
 	}
 });
 
-// =============================================
+
+// =================================================================================
 
 module.exports = contactRouter;
