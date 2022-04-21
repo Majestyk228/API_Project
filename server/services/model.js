@@ -25,7 +25,7 @@ async function getAllModel() {
 //adds one model in db from request body passed in parameter
 async function insertModel(modelReq) {
     //SQL query structure
-    const requete = 'INSERT INTO model (id, name, filename) VALUES (null, "' + modelReq.name + '","' + modelReq.filename + '");';
+    const requete = 'INSERT INTO model (id, name, filename) VALUES (null, "' + modelReq.name + '","../Templates/' + modelReq.filename + '");';
 
     //sending query
     const results = await db.query(requete, "");
